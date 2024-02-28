@@ -1,30 +1,80 @@
-# React + TypeScript + Vite
+# Lorby Authentication
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проект предполагает разработку программного решения для веб-сайта и мобильного приложения, предназначенного для повышения эффективности онлайн-репетиторства. Задача на данном этапе - реализовать вход в приложение для авторизованных и еще не зарегистрированных пользователей.
 
-Currently, two official plugins are available:
+## Используемые технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+В проекте использовались следующие технологии:
 
-## Expanding the ESLint configuration
+- React
+- Redux-Toolkit
+- RTK Query
+- TypeScript
+- Vite
+- Formik + Yup
+- SASS/SCSS
+- BEM + SCSS modules
+- FSD Arhitecture 
+  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Установка
 
-- Configure the top-level `parserOptions` property like this:
+1. **Установите Node.js и Yarn**
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+   Node.js и Yarn (пакетный менеджер) необходимы для установки и использования Vite, React и других библиотек. Вы можете скачать их с официального сайта Node.js и Yarn.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. **Установите Vite**
+
+   Vite - это современный сборщик, который вы использовали в своем проекте. Вы можете установить его, используя Yarn:
+
+   ```
+   yarn global add create-vite
+   ```
+
+5. **Склонируйте проект**
+
+   Используйте git для клонирования вашего проекта на вашу машину.
+
+7. **Установите зависимости**
+
+   Перейдите в каталог проекта и установите необходимые зависимости с помощью Yarn:
+
+   ```
+   yarn add @reduxjs/toolkit react react-dom react-redux react-router-dom typescript @types/node @types/react-redux react-toastify sass formik yup classnames
+   ```
+
+9. **Запустите проект**
+
+   После установки всех зависимостей вы можете запустить проект с помощью команды:
+
+   ```
+   yarn dev
+   ```
+
+## Использование
+
+После запуска проекта, если вы не авторизованы - вас перебросит на страницу с логином
+
+![image](https://github.com/nurlanov0105/neobis-front-auth/assets/126797112/a35a891a-b46d-4da7-b3d0-4f3b38a2de79)
+
+Если у вас нету аккаунта, вы можете авторизоваться. Для этого нужно перейти на страницу с авторизацией, кликнув кнопку **У меня еще нет аккаунта**.
+
+![image](https://github.com/nurlanov0105/neobis-front-auth/assets/126797112/3d48056e-ed7b-4548-8c1b-06b7984c4626)
+
+После того как вы заполните форму и отправите данные, вас перебросит на страницу подтверждения верификации. Вам необходимо будет перейти на почту 
+и подвердить действие
+
+![image](https://github.com/nurlanov0105/neobis-front-auth/assets/126797112/44f74a9a-beac-438f-97c3-571e9ee9310a)
+
+После авторизации вы попадете на главную страницу). И там есть возможность выйти с аккаунта, если захотите.
+
+![image](https://github.com/nurlanov0105/neobis-front-auth/assets/126797112/6de21b2a-9400-4df3-9270-89030ac2d0de)
+
+
+## Вклад
+
+Кто хочет помочь в развитии данного проекта, можете написать мне в телеграм: @nnnNursultan
+
+## Авторы
+
+https://github.com/nurlanov0105/
