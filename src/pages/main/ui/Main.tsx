@@ -1,4 +1,3 @@
-import { useGetToursQuery } from '@/features/auth';
 import styles from './styles.module.scss';
 import classNames from 'classnames';
 import illustrationImg from '@/shared/assets/imgs/auth/illustration.png';
@@ -7,11 +6,6 @@ import { showModal } from '@/widgets/modal';
 
 const Main = () => {
    const dispatch = useAppDispatch();
-   const { data, isLoading } = useGetToursQuery({});
-
-   if (!isLoading) {
-      console.log(data);
-   }
 
    const handleClick = () => {
       dispatch(showModal('LogoutModal'));

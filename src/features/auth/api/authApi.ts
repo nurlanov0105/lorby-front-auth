@@ -8,45 +8,35 @@ export const authApi = createApi({
       // fetchFn: (url, args) => fetch(url, { ...args, mode: 'no-cors' }),
    }),
    endpoints: (builder) => ({
-      // register: builder.mutation<RegisterParams, RegisterParams>({
-      //    query: (params) => {
-      //       const { firstName, lastName, email, userImage, password } = params;
-      //       return {
-      //          url: 'api/users/signUp',
-      //          method: 'POST',
-      //          body: {
-      //             firstName,
-      //             lastName,
-      //             email,
-      //             userImage,
-      //             password,
-      //          },
-      //       };
-      //    },
-      // }),
-      // login: builder.mutation<LoginApiResponse, LoginParams>({
-      //    query: (params) => {
-      //       const { email, password } = params;
-      //       return {
-      //          url: 'api/users/signIn',
-      //          method: 'POST',
-      //          body: {
-      //             email,
-      //             password,
-      //          },
-      //       };
-      //    },
-      // }),
-      getTours: builder.query({
-         query: () => {
+      register: builder.mutation({
+         query: (params) => {
+            const { login, email, password } = params;
             return {
-               url: '/tours/',
-               method: 'GET',
+               url: 'register',
+               method: 'POST',
+               body: {
+                  fullName: login,
+                  email,
+                  password,
+               },
+            };
+         },
+      }),
+      login: builder.mutation({
+         query: (params) => {
+            const { email, password } = params;
+            return {
+               url: 'auth',
+               method: 'POST',
+               body: {
+                  email,
+                  password,
+               },
             };
          },
       }),
    }),
 });
 
-// export const { useRegisterMutation, useLoginMutation } = authApi;
-export const { useGetToursQuery } = authApi;
+export const { useRegisterMutation, useLoginMutation } = authApi;
+export const {} = authApi;

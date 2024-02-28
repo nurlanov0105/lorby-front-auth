@@ -1,12 +1,12 @@
 .section {
    max-width: 34.3rem;
    width: 100%;
-   img {
+   .mobImg {
       display: none;
    }
 
    @media (max-width: 900px) {
-      img {
+      .mobImg {
          display: block;
          max-width: 180px;
          margin-left: auto;

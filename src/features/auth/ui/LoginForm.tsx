@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
@@ -6,11 +6,15 @@ import classNames from 'classnames';
 import { loginValidationSchema } from '../model/validation';
 import styles from './styles.module.scss';
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
+import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 
-const LoginForm: FC = () => {
-   const onSubmit = (e: any) => {
-      e.preventDefault();
-   };
+type Props = {
+   handleLogin: (email: string, password: string) => void;
+};
+
+const LoginForm: FC<Props> = ({ handleLogin }) => {
+   const [showPassword, setShowPassword] = useState(false);
+
    const formik = useFormik({
       initialValues: {
          login: '',
@@ -23,7 +27,8 @@ const LoginForm: FC = () => {
       validationSchema: loginValidationSchema,
       onSubmit: (values, { setSubmitting }) => {
          setSubmitting(false);
-         console.log(values);
+         const { login, password } = values;
+         handleLogin(login, password);
       },
    });
 
@@ -43,7 +48,7 @@ const LoginForm: FC = () => {
                />
                <div className={styles.form__box}>
                   <input
-                     type='password'
+                     type={showPassword ? 'text' : 'password'}
                      className={styles.form__input}
                      placeholder='Пароль (тоже введи)'
                      name='password'
@@ -51,7 +56,12 @@ const LoginForm: FC = () => {
                      onBlur={formik.handleBlur}
                      value={formik.values.password}
                   />
-                  <img src={eyeOpenedImg} alt='eye opened' className={styles.form__eye} />
+                  <img
+                     src={showPassword ? eyeOpenedImg : eyeClosedImg}
+                     alt='eye opened'
+                     className={styles.form__eye}
+                     onClick={() => setShowPassword(!showPassword)}
+                  />
                </div>
             </div>
             <button
