@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
 
@@ -13,7 +12,6 @@ type Props = {
 };
 
 const RegisterForm: FC<Props> = ({ handleRegister }) => {
-   const navigate = useNavigate();
    const [showPassword, setShowPassword] = useState(false);
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 

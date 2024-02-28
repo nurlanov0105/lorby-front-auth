@@ -1,11 +1,9 @@
 import styles from './styles.module.scss';
 import { useAppDispatch } from '@/app/appStore';
-import { useNavigate } from 'react-router-dom';
 import { closeModal } from '@/widgets/modal';
 
 const EmailNoticeModal = () => {
    const dispatch = useAppDispatch();
-   const navigate = useNavigate();
 
    const handleClick = () => {
       dispatch(closeModal());

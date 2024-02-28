@@ -2,7 +2,7 @@ import { RegisterForm } from '@/features/auth';
 import { useRegisterMutation } from '@/features/auth/api/authApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import styles from './styles.module.scss';
+// import styles from './styles.module.scss';
 
 const Register = () => {
    const navigate = useNavigate();

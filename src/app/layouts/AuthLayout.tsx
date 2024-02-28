@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import { AuthIntro } from '@/entities/authIntro';
-import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import ArrowBackImg from '@/shared/assets/imgs/auth/arrow-back.svg';
 
 const AuthLayout = () => {
