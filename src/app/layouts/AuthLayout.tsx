@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import { AuthIntro } from '@/entities/authIntro';
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import ArrowBackImg from '@/shared/assets/imgs/auth/arrow-back.svg';
 
 const AuthLayout = () => {
    const pathname = useLocation().pathname.slice(1);
@@ -21,7 +22,7 @@ const AuthLayout = () => {
             ) : (
                <div className={styles.section}>
                   <div className={styles.back} onClick={handleGoBack}>
-                     Назад
+                     <img src={ArrowBackImg} alt='arrow back' /> <span>Назад</span>
                   </div>
                   <div className={styles.block}>
                      <Outlet />
