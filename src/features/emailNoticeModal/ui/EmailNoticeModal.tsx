@@ -1,7 +1,6 @@
 import styles from './styles.module.scss';
 import { useAppDispatch } from '@/app/appStore';
 import { useNavigate } from 'react-router-dom';
-import { setEmail } from '@/features/auth';
 import { closeModal } from '@/widgets/modal';
 
 const EmailNoticeModal = () => {
@@ -10,7 +9,7 @@ const EmailNoticeModal = () => {
 
    const handleClick = () => {
       dispatch(closeModal());
-      dispatch(setEmail());
+
       navigate('/');
    };
    return (

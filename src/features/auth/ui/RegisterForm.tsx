@@ -8,9 +8,11 @@ import styles from './styles.module.scss';
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 
-type Props = {};
+type Props = {
+   handleRegister: (login: string, email: string, password: string) => void;
+};
 
-const RegisterForm: FC<Props> = ({}) => {
+const RegisterForm: FC<Props> = ({ handleRegister }) => {
    const navigate = useNavigate();
    const [showPassword, setShowPassword] = useState(false);
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -31,8 +33,9 @@ const RegisterForm: FC<Props> = ({}) => {
       validationSchema,
       onSubmit: (values, { setSubmitting }) => {
          setSubmitting(false);
-         console.log(values);
-         navigate('/verification');
+
+         const { login, email, password } = values;
+         handleRegister(login, email, password);
       },
       validateOnMount: true,
    });

@@ -1,10 +1,14 @@
 import { useAppDispatch } from '@/app/appStore';
 import styles from './styles.module.scss';
 import { closeModal } from '@/widgets/modal';
+import { removeUser } from '@/features/auth';
 
 const LogoutModal = () => {
    const dispatch = useAppDispatch();
    const handleLogOut = () => {
+      localStorage.removeItem('currentUser');
+      dispatch(removeUser());
+
       dispatch(closeModal());
    };
    const handleStay = () => {
