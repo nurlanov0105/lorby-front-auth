@@ -1,0 +1,35 @@
+.main {
+   height: 100vh;
+}
+
+.section {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   &__title {
+      margin-bottom: 8px;
+   }
+
+   &__subtitle {
+      margin-bottom: 4rem;
+   }
+
+   &__img {
+      display: inline-block;
+      max-width: 42rem;
+      width: 100%;
+      margin-bottom: 4rem;
+   }
+
+   &__btn {
+      max-width: 34.3rem;
+   }
+
+   @media (max-width: 1439px) {
+      &__img {
+         max-width: 31rem;
+      }
+   }
+}

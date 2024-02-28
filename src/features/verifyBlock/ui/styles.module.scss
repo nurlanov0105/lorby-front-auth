@@ -1,0 +1,33 @@
+.block {
+   text-align: center;
+
+   &__title {
+      font-size: 2.4rem;
+      font-weight: 500;
+      margin-bottom: 4.8rem;
+   }
+
+   &__descr {
+      max-width: 31.3rem;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+
+      font-size: 20px;
+      font-weight: 500;
+      color: $medium-dark;
+
+      b {
+         color: $extra-dark;
+      }
+   }
+
+   &__smile {
+      margin-top: 2rem;
+      color: $extra-dark;
+   }
+
+   &__btn {
+      margin-top: 4.8rem;
+   }
+}

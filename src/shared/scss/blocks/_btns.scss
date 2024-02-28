@@ -1,0 +1,64 @@
+.btn {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+
+   height: 5rem;
+   width: 100%;
+   border-radius: 12px;
+   background: #292929;
+   overflow: hidden;
+
+   span {
+      color: #f8f8f8;
+      font-weight: 500;
+      line-height: 1.5;
+   }
+   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+
+   @media (hover: hover) and (pointer: fine) {
+      &:hover {
+         background-color: #595959;
+      }
+   }
+
+   &:active {
+      background-color: #595959;
+   }
+
+   &--light {
+      background-color: $extra-light;
+
+      span {
+         color: #292929;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+         &:hover {
+            background-color: #595959;
+            span {
+               color: #f8f8f8;
+            }
+         }
+      }
+
+      &:active {
+         background-color: #292929;
+      }
+   }
+
+   &:disabled {
+      background-color: #d7d7d7;
+      cursor: default;
+
+      @media (hover: hover) and (pointer: fine) {
+         &:hover {
+            background-color: #d7d7d7;
+         }
+      }
+
+      &:active {
+         background-color: #d7d7d7;
+      }
+   }
+}

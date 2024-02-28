@@ -1,0 +1,18 @@
+.block {
+   display: flex;
+   flex-direction: column;
+   row-gap: 2.4rem;
+   max-width: 31.1rem;
+   width: 100%;
+   text-align: center;
+
+   &__title {
+      font-size: 2rem;
+      font-weight: 500;
+   }
+
+   &__descr {
+      color: $medium-dark;
+      font-weight: 500;
+   }
+}
