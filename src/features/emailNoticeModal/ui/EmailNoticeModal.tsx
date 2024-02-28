@@ -9,8 +9,6 @@ const EmailNoticeModal = () => {
 
    const handleClick = () => {
       dispatch(closeModal());
-
-      navigate('/');
    };
    return (
       <div className={styles.block}>
