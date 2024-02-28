@@ -20,7 +20,7 @@
       display: inline-block;
       max-width: 42rem;
       width: 100%;
-      margin-bottom: 4rem;
+      margin-bottom: 40px;
    }
 
    &__btn {
@@ -29,7 +29,13 @@
 
    @media (max-width: 1439px) {
       &__img {
-         max-width: 31rem;
+         max-width: 36rem;
+      }
+   }
+
+   @media (max-width: 900px) {
+      &__subtitle {
+         margin-bottom: 48px;
       }
    }
 }
