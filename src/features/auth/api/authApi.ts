@@ -1,3 +1,4 @@
+import { Endpoints } from '@/shared/api/endpoints';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const BASE_URL = import.meta.env.VITE_TOURS_BASE_API_URL;
 
@@ -5,14 +6,13 @@ export const authApi = createApi({
    reducerPath: 'authApi',
    baseQuery: fetchBaseQuery({
       baseUrl: BASE_URL,
-      // fetchFn: (url, args) => fetch(url, { ...args, mode: 'no-cors' }),
    }),
    endpoints: (builder) => ({
       register: builder.mutation({
          query: (params) => {
             const { login, email, password } = params;
             return {
-               url: 'register',
+               url: Endpoints.REGISTER,
                method: 'POST',
                body: {
                   fullName: login,
@@ -26,7 +26,7 @@ export const authApi = createApi({
          query: (params) => {
             const { email, password } = params;
             return {
-               url: 'auth',
+               url: Endpoints.LOGIN,
                method: 'POST',
                body: {
                   email,

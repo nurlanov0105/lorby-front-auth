@@ -33,3 +33,41 @@ export const loginValidationSchema = yup.object({
       .matches(/[^a-zA-Z0-9]/)
       .required(),
 });
+
+export const pswValidationSchema = yup.object({
+   password: yup
+      .string()
+      .min(8, 'От 8 до 15 символов')
+      .max(15, 'От 8 до 15 символов')
+      .matches(/[a-z]/, 'Строчные и прописные буквы')
+      .matches(/[A-Z]/, 'Строчные и прописные буквы')
+      .matches(/\d/, 'Минимум 1 цифра')
+      .matches(/[^a-zA-Z0-9]/, 'Минимум 1 спецсимвол (!, ", #, $...)')
+      .required('Требуется пароль'),
+   passwordConfirm: yup
+      .string()
+      .oneOf([yup.ref('password'), undefined], 'Пароли должны совпадать')
+      .required('Требуется подтверждение пароля'),
+   // newPassword: yup
+   //    .string()
+   //    .min(8, 'От 8 до 15 символов')
+   //    .max(15, 'От 8 до 15 символов')
+   //    .matches(/[a-z]/, 'Строчные и прописные буквы')
+   //    .matches(/[A-Z]/, 'Строчные и прописные буквы')
+   //    .matches(/\d/, 'Минимум 1 цифра')
+   //    .matches(/[^a-zA-Z0-9]/, 'Минимум 1 спецсимвол (!, ", #, $...)')
+   //    .required('Требуется пароль')
+   //    .notOneOf([yup.ref('password'), null], 'Новый пароль не должен быть похож на старый'),
+});
+
+export const singlePswValidationSchema = yup.object({
+   password: yup
+      .string()
+      .min(8)
+      .max(15)
+      .matches(/[a-z]/)
+      .matches(/[A-Z]/)
+      .matches(/\d/)
+      .matches(/[^a-zA-Z0-9]/)
+      .required(),
+});
