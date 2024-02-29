@@ -1,6 +1,5 @@
 import { RegisterForm } from '@/features/auth';
 import { useRegisterMutation } from '@/features/auth/api/authApi';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 // import styles from './styles.module.scss';
 
@@ -13,8 +12,6 @@ const Register = () => {
          const res = await register({ login, email, password });
 
          if (res) {
-            toast.success('Почти закончили)');
-
             navigate('/verification');
          }
       } catch (error) {

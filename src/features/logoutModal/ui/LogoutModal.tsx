@@ -5,15 +5,17 @@ import { removeUser } from '@/features/auth';
 
 const LogoutModal = () => {
    const dispatch = useAppDispatch();
+
    const handleLogOut = () => {
       localStorage.removeItem('currentUser');
       dispatch(removeUser());
-
       dispatch(closeModal());
    };
+
    const handleStay = () => {
       dispatch(closeModal());
    };
+
    return (
       <div className={styles.block}>
          <h4 className={styles.block__title}>Выйти?</h4>
