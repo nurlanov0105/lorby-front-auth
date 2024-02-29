@@ -1,56 +1,61 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { singlePswValidationSchema } from '../model/validation';
 import classNames from 'classnames';
-
-import { loginValidationSchema } from '../model/validation';
 import styles from './styles.module.scss';
+
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
+import { useAppDispatch } from '@/app/appStore';
+import { showModal } from '@/widgets/modal';
 
 type Props = {
-   handleLogin: (email: string, password: string) => void;
+   handleSendedPsw: (password: string) => void;
 };
 
-const LoginForm: FC<Props> = ({ handleLogin }) => {
+const CheckSendedForm: FC<Props> = ({ handleSendedPsw }) => {
+   const dispatch = useAppDispatch();
    const [showPassword, setShowPassword] = useState(false);
+
+   const handleClick = () => {
+      dispatch(showModal('EmailNoticeModal'));
+   };
 
    const formik = useFormik({
       initialValues: {
-         login: '',
          password: '',
       },
       initialErrors: {
-         login: 'Требуется логин',
          password: 'Требуется пароль',
       },
-      validationSchema: loginValidationSchema,
+      validationSchema: singlePswValidationSchema,
       onSubmit: (values, { setSubmitting }) => {
          setSubmitting(false);
-         const { login, password } = values;
-         handleLogin(login, password);
+         const { password } = values;
+         handleSendedPsw(password);
       },
+      validateOnMount: true,
    });
+
+   // inputs validations
+   const pswClassNames = `${styles.form__input} ${
+      formik.touched.password && formik.errors.password ? styles.form__input_error : ''
+   }`;
 
    return (
       <div className={styles.formWrapper}>
-         <h3 className='h3'>Вэлком бэк!</h3>
+         <div className={styles.heading}>
+            <h3 className='h3'>Сбросс пароля</h3>
+            <h4>На твою почту отправили новый пароль</h4>
+         </div>
+
          <form onSubmit={formik.handleSubmit} className={styles.form}>
             <div className={styles.form__col}>
-               <input
-                  type='text'
-                  className={styles.form__input}
-                  placeholder='Введи туда-сюда логин'
-                  name='login'
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.login}
-               />
                <div className={styles.form__box}>
                   <input
                      type={showPassword ? 'text' : 'password'}
-                     className={styles.form__input}
-                     placeholder='Пароль (тоже введи)'
+                     className={pswClassNames}
+                     placeholder='Введи пароль'
                      name='password'
                      onChange={formik.handleChange}
                      onBlur={formik.handleBlur}
@@ -64,23 +69,21 @@ const LoginForm: FC<Props> = ({ handleLogin }) => {
                   />
                </div>
             </div>
+
             <button
                type='submit'
                className={classNames('btn', styles.form__btn)}
                disabled={!!Object.keys(formik.errors).length}>
-               <span>Войти</span>
+               <span>Далее</span>
             </button>
          </form>
          <div className={styles.btns}>
-            <Link to='/reset-password' className={classNames('btn btn--light', styles.btnLight)}>
-               <span>Сброс пароля</span>
-            </Link>
-            <Link to='/register' className={classNames('btn btn--light', styles.btnLight)}>
-               <span>У меня еще нет аккаунта</span>
-            </Link>
+            <button className={classNames('btn btn--light', styles.btnLight)} onClick={handleClick}>
+               <span>Не получил{'(а)'} пароль</span>
+            </button>
          </div>
       </div>
    );
 };
 
-export default LoginForm;
+export default CheckSendedForm;

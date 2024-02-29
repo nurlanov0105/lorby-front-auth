@@ -7,6 +7,8 @@ import { Register } from '@/pages/register';
 import { AuthLayout } from '../layouts';
 import { Verification } from '@/pages/verification';
 import { Modal } from '@/widgets/modal';
+import { ResetPsw } from '@/pages/reset-psw';
+import { ForgetPsw } from '@/pages/forget-psw';
 
 const Routers = () => {
    return (
@@ -20,6 +22,8 @@ const Routers = () => {
                <Route path='login' element={<Login />} />
                <Route path='register' element={<Register />} />
                <Route path='verification' element={<Verification />} />
+               <Route path='reset-password' element={<ResetPsw />} />
+               <Route path='forget-password' element={<ForgetPsw />} />
             </Route>
 
             <Route path='*' element={<NotFound />} />
