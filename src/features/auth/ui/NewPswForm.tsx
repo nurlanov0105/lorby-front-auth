@@ -5,7 +5,10 @@ import styles from './styles.module.scss';
 
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
-import { pswValidationSchema } from '../model/validation';
+import { pswValidationSchema } from '../lib/validation';
+import ErrorMessage from './ErrorMessage';
+import { getInputClassNames } from '../lib/getInputClassNames';
+import { getValidationListItem } from './getValidationListItem';
 
 type Props = {
    handleNewPsw: (password: string) => void;
@@ -15,15 +18,15 @@ const NewPswForm: FC<Props> = ({ handleNewPsw }) => {
    const [showPassword, setShowPassword] = useState(false);
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+   const handlePasswordShow = () => setShowPassword(!showPassword);
+   const handleConfirmPasswordShow = () => setShowConfirmPassword(!showConfirmPassword);
+
    const formik = useFormik({
       initialValues: {
          password: '',
          passwordConfirm: '',
       },
-      initialErrors: {
-         password: 'Требуется пароль',
-         passwordConfirm: 'Требуется подтверждение пароля',
-      },
+
       validationSchema: pswValidationSchema,
       onSubmit: (values, { setSubmitting }) => {
          setSubmitting(false);
@@ -34,14 +37,8 @@ const NewPswForm: FC<Props> = ({ handleNewPsw }) => {
    });
 
    // inputs validations
-   const pswClassNames = `${styles.form__input} ${
-      formik.touched.password && formik.errors.password ? styles.form__input_error : ''
-   }`;
-   const pswConfirmClassNames = `${styles.form__input} ${
-      formik.touched.passwordConfirm && formik.errors.passwordConfirm
-         ? styles.form__input_error
-         : ''
-   }`;
+   const pswClassNames = getInputClassNames(formik, 'password');
+   const pswConfirmClassNames = getInputClassNames(formik, 'passwordConfirm');
 
    return (
       <div className={styles.formWrapper}>
@@ -51,24 +48,50 @@ const NewPswForm: FC<Props> = ({ handleNewPsw }) => {
          </div>
          <form onSubmit={formik.handleSubmit} className={styles.form}>
             <div className={styles.form__col}>
-               <div className={styles.form__box}>
-                  <input
-                     type={showPassword ? 'text' : 'password'}
-                     className={pswClassNames}
-                     placeholder='Введи новый пароль'
-                     name='password'
-                     onChange={formik.handleChange}
-                     onBlur={formik.handleBlur}
-                     value={formik.values.password}
-                     required={true}
-                  />
-                  <img
-                     src={showPassword ? eyeOpenedImg : eyeClosedImg}
-                     alt='eye opened'
-                     className={styles.form__eye}
-                     onClick={() => setShowPassword(!showPassword)}
-                  />
+               <div className={styles.form__validation}>
+                  <div className={styles.form__box}>
+                     <input
+                        type={showPassword ? 'text' : 'password'}
+                        className={pswClassNames}
+                        placeholder='Создай пароль'
+                        name='password'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                     />
+                     <img
+                        src={showPassword ? eyeOpenedImg : eyeClosedImg}
+                        alt='eye opened'
+                        className={styles.form__eye}
+                        onClick={handlePasswordShow}
+                     />
+                  </div>
+
+                  <ul className={styles.form__list}>
+                     {getValidationListItem(
+                        formik,
+                        formik.values.password.length >= 8 && formik.values.password.length <= 15,
+                        'От 8 до 15 символов'
+                     )}
+                     {getValidationListItem(
+                        formik,
+                        /[a-z]/.test(formik.values.password) &&
+                           /[A-Z]/.test(formik.values.password),
+                        'Строчные и прописные буквы'
+                     )}
+                     {getValidationListItem(
+                        formik,
+                        /\d/.test(formik.values.password),
+                        'Минимум 1 цифра'
+                     )}
+                     {getValidationListItem(
+                        formik,
+                        /[^a-zA-Z0-9]/.test(formik.values.password),
+                        'Минимум 1 спецсимвол (!, ", #, $...)'
+                     )}
+                  </ul>
                </div>
+
                <div className={styles.form__box}>
                   <input
                      type={showConfirmPassword ? 'text' : 'password'}
@@ -83,8 +106,9 @@ const NewPswForm: FC<Props> = ({ handleNewPsw }) => {
                      src={showConfirmPassword ? eyeOpenedImg : eyeClosedImg}
                      alt='eye opened'
                      className={styles.form__eye}
-                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                     onClick={handleConfirmPasswordShow}
                   />
+                  <ErrorMessage formik={formik} name='passwordConfirm' />
                </div>
             </div>
 

@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
 
-import { loginValidationSchema } from '../model/validation';
+import { loginValidationSchema } from '../lib/validation';
 import styles from './styles.module.scss';
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
+import ErrorMessage from './ErrorMessage';
+import { getInputClassNames } from '../lib/getInputClassNames';
 
 type Props = {
    handleLogin: (email: string, password: string) => void;
@@ -15,15 +17,14 @@ type Props = {
 const LoginForm: FC<Props> = ({ handleLogin }) => {
    const [showPassword, setShowPassword] = useState(false);
 
+   const handlePasswordShow = () => setShowPassword(!showPassword);
+
    const formik = useFormik({
       initialValues: {
          login: '',
          password: '',
       },
-      initialErrors: {
-         login: 'Требуется логин',
-         password: 'Требуется пароль',
-      },
+
       validationSchema: loginValidationSchema,
       onSubmit: (values, { setSubmitting }) => {
          setSubmitting(false);
@@ -32,24 +33,32 @@ const LoginForm: FC<Props> = ({ handleLogin }) => {
       },
    });
 
+   const loginClassNames = getInputClassNames(formik, 'login');
+   const pswClassNames = getInputClassNames(formik, 'password');
+
    return (
       <div className={styles.formWrapper}>
          <h3 className='h3'>Вэлком бэк!</h3>
          <form onSubmit={formik.handleSubmit} className={styles.form}>
             <div className={styles.form__col}>
-               <input
-                  type='text'
-                  className={styles.form__input}
-                  placeholder='Введи туда-сюда логин'
-                  name='login'
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.login}
-               />
+               <div className={styles.form__box}>
+                  <input
+                     type='text'
+                     className={loginClassNames}
+                     placeholder='Введи туда-сюда логин'
+                     name='login'
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.login}
+                  />
+
+                  <ErrorMessage formik={formik} name='login' />
+               </div>
+
                <div className={styles.form__box}>
                   <input
                      type={showPassword ? 'text' : 'password'}
-                     className={styles.form__input}
+                     className={pswClassNames}
                      placeholder='Пароль (тоже введи)'
                      name='password'
                      onChange={formik.handleChange}
@@ -60,8 +69,9 @@ const LoginForm: FC<Props> = ({ handleLogin }) => {
                      src={showPassword ? eyeOpenedImg : eyeClosedImg}
                      alt='eye opened'
                      className={styles.form__eye}
-                     onClick={() => setShowPassword(!showPassword)}
+                     onClick={handlePasswordShow}
                   />
+                  <ErrorMessage formik={formik} name='password' />
                </div>
             </div>
             <button

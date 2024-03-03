@@ -112,6 +112,13 @@
    &__item_error {
       color: $error-color !important;
    }
+
+   .error {
+      margin-top: 5px;
+      margin-left: 5px;
+      color: $error-color;
+      font-size: 16px;
+   }
 }
 
 @media (max-width: 1300px) {
