@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useFormik } from 'formik';
-import { singlePswValidationSchema } from '../model/validation';
+import { singlePswValidationSchema } from '../lib/validation';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
 
@@ -8,6 +8,8 @@ import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 import { useAppDispatch } from '@/app/appStore';
 import { showModal } from '@/widgets/modal';
+import { getInputClassNames } from '../lib/getInputClassNames';
+import ErrorMessage from './ErrorMessage';
 
 type Props = {
    handleSendedPsw: (password: string) => void;
@@ -17,6 +19,8 @@ const CheckSendedForm: FC<Props> = ({ handleSendedPsw }) => {
    const dispatch = useAppDispatch();
    const [showPassword, setShowPassword] = useState(false);
 
+   const handlePasswordShow = () => setShowPassword(!showPassword);
+
    const handleClick = () => {
       dispatch(showModal('EmailNoticeModal'));
    };
@@ -25,9 +29,7 @@ const CheckSendedForm: FC<Props> = ({ handleSendedPsw }) => {
       initialValues: {
          password: '',
       },
-      initialErrors: {
-         password: 'Требуется пароль',
-      },
+
       validationSchema: singlePswValidationSchema,
       onSubmit: (values, { setSubmitting }) => {
          setSubmitting(false);
@@ -38,9 +40,7 @@ const CheckSendedForm: FC<Props> = ({ handleSendedPsw }) => {
    });
 
    // inputs validations
-   const pswClassNames = `${styles.form__input} ${
-      formik.touched.password && formik.errors.password ? styles.form__input_error : ''
-   }`;
+   const pswClassNames = getInputClassNames(formik, 'password');
 
    return (
       <div className={styles.formWrapper}>
@@ -65,8 +65,9 @@ const CheckSendedForm: FC<Props> = ({ handleSendedPsw }) => {
                      src={showPassword ? eyeOpenedImg : eyeClosedImg}
                      alt='eye opened'
                      className={styles.form__eye}
-                     onClick={() => setShowPassword(!showPassword)}
+                     onClick={handlePasswordShow}
                   />
+                  <ErrorMessage formik={formik} name='password' />
                </div>
             </div>
 
