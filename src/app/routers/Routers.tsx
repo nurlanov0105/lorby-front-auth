@@ -9,6 +9,7 @@ import { Verification } from '@/pages/verification';
 import { Modal } from '@/widgets/modal';
 import { ResetPsw } from '@/pages/reset-psw';
 import { ForgetPsw } from '@/pages/forget-psw';
+import { Confirm } from '@/pages/confirm';
 
 const Routers = () => {
    return (
@@ -24,6 +25,7 @@ const Routers = () => {
                <Route path='verification' element={<Verification />} />
                <Route path='reset-password' element={<ResetPsw />} />
                <Route path='forget-password' element={<ForgetPsw />} />
+               <Route path='confirm' element={<Confirm />} />
             </Route>
 
             <Route path='*' element={<NotFound />} />
