@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
 
-import { loginValidationSchema } from '../lib/validation';
+import { loginValidationSchema } from '../model/validation';
 import styles from './styles.module.scss';
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 import ErrorMessage from './ErrorMessage';
-import { getInputClassNames } from '../lib/getInputClassNames';
+import { getInputClassNames } from '../model/getInputClassNames';
 
 type Props = {
    handleLogin: (email: string, password: string) => void;

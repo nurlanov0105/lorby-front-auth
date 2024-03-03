@@ -5,9 +5,9 @@ import styles from './styles.module.scss';
 
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
-import { pswValidationSchema } from '../lib/validation';
+import { pswValidationSchema } from '../model/validation';
 import ErrorMessage from './ErrorMessage';
-import { getInputClassNames } from '../lib/getInputClassNames';
+import { getInputClassNames } from '../model/getInputClassNames';
 import { getValidationListItem } from './getValidationListItem';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useFormik } from 'formik';
-import { singlePswValidationSchema } from '../lib/validation';
+import { singlePswValidationSchema } from '../model/validation';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
 
@@ -8,7 +8,7 @@ import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 import { useAppDispatch } from '@/app/appStore';
 import { showModal } from '@/widgets/modal';
-import { getInputClassNames } from '../lib/getInputClassNames';
+import { getInputClassNames } from '../model/getInputClassNames';
 import ErrorMessage from './ErrorMessage';
 
 type Props = {

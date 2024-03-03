@@ -2,12 +2,12 @@ import { FC, useState } from 'react';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
 
-import { validationSchema } from '../lib/validation';
+import { validationSchema } from '../model/validation';
 import styles from './styles.module.scss';
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 import ErrorMessage from './ErrorMessage';
-import { getInputClassNames } from '../lib/getInputClassNames';
+import { getInputClassNames } from '../model/getInputClassNames';
 import { getValidationListItem } from './getValidationListItem';
 
 type Props = {
