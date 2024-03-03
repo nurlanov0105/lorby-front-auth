@@ -24,7 +24,7 @@ const ConfirmBlock = () => {
       <div className={styles.confirm}>
          <h2 className={styles.confirm__title}>Подтверждение аккаунта прошло успешно!</h2>
          <div className={styles.confirm__block}>
-            Через <b>{countdown}</b> секунд вас перенест на главную страницу.
+            Через <b>{countdown}</b> секунд вас перенест на страницу логина.
          </div>
       </div>
    );
