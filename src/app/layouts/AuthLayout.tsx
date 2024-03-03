@@ -21,9 +21,11 @@ const AuthLayout = () => {
                <Outlet />
             ) : (
                <div className={styles.section}>
-                  <div className={styles.back} onClick={handleGoBack}>
-                     <img src={ArrowBackImg} alt='arrow back' /> <span>Назад</span>
-                  </div>
+                  {pathname !== 'confirm' && (
+                     <button className={styles.back} onClick={handleGoBack}>
+                        <img src={ArrowBackImg} alt='arrow back' /> <span>Назад</span>
+                     </button>
+                  )}
                   <div className={styles.block}>
                      <Outlet />
                   </div>
