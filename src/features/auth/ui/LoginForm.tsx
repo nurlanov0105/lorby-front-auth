@@ -31,6 +31,7 @@ const LoginForm: FC<Props> = ({ handleLogin }) => {
          const { login, password } = values;
          handleLogin(login, password);
       },
+      validateOnMount: true,
    });
 
    const loginClassNames = getInputClassNames(formik, 'login');
