@@ -1,11 +1,11 @@
 import { Navigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { useAuth } from '@/shared/hooks/useAuth';
+import useAuthTokens from '@/shared/hooks/useAuthTokens';
 
 const ProtectedRoute = () => {
-   const { isAuth } = useAuth();
+   const { isRefreshTokenExpired } = useAuthTokens();
 
-   return isAuth ? <Outlet /> : <Navigate to='/login' />;
+   return isRefreshTokenExpired ? <Navigate to='/login' /> : <Outlet />;
 };
 
 export default ProtectedRoute;

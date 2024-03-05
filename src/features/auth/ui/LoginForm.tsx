@@ -11,10 +11,11 @@ import ErrorMessage from './ErrorMessage';
 import { getInputClassNames } from '../model/getInputClassNames';
 
 type Props = {
-   handleLogin: (email: string, password: string) => void;
+   handleLogin: (username: string, password: string) => void;
+   isLoading: boolean;
 };
 
-const LoginForm: FC<Props> = ({ handleLogin }) => {
+const LoginForm: FC<Props> = ({ handleLogin, isLoading }) => {
    const [showPassword, setShowPassword] = useState(false);
 
    const handlePasswordShow = () => setShowPassword(!showPassword);
@@ -28,8 +29,8 @@ const LoginForm: FC<Props> = ({ handleLogin }) => {
       validationSchema: loginValidationSchema,
       onSubmit: (values, { setSubmitting }) => {
          setSubmitting(false);
-         const { login, password } = values;
-         handleLogin(login, password);
+         const { login: username, password } = values;
+         handleLogin(username, password);
       },
       validateOnMount: true,
    });
@@ -78,13 +79,13 @@ const LoginForm: FC<Props> = ({ handleLogin }) => {
             <button
                type='submit'
                className={classNames('btn', styles.form__btn)}
-               disabled={!!Object.keys(formik.errors).length}>
-               <span>Войти</span>
+               disabled={!!Object.keys(formik.errors).length || isLoading}>
+               {isLoading ? <span>Загрузка...</span> : <span>Войти</span>}
             </button>
          </form>
          <div className={styles.btns}>
-            <Link to='/reset-password' className={classNames('btn btn--light', styles.btnLight)}>
-               <span>Сброс пароля</span>
+            <Link to='/forget-password' className={classNames('btn btn--light', styles.btnLight)}>
+               <span>Забыл{'(а)'} пароль</span>
             </Link>
             <Link to='/register' className={classNames('btn btn--light', styles.btnLight)}>
                <span>У меня еще нет аккаунта</span>

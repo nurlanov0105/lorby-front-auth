@@ -12,9 +12,10 @@ import { getValidationListItem } from './getValidationListItem';
 
 type Props = {
    handleRegister: (login: string, email: string, password: string) => void;
+   isLoading: boolean;
 };
 
-const RegisterForm: FC<Props> = ({ handleRegister }) => {
+const RegisterForm: FC<Props> = ({ handleRegister, isLoading }) => {
    const [showPassword, setShowPassword] = useState(false);
    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -141,8 +142,8 @@ const RegisterForm: FC<Props> = ({ handleRegister }) => {
             <button
                type='submit'
                className={classNames('btn', styles.form__btn)}
-               disabled={!!Object.keys(formik.errors).length}>
-               <span>Далее</span>
+               disabled={!!Object.keys(formik.errors).length || isLoading}>
+               {isLoading ? <span>Отправка...</span> : <span>Далее</span>}
             </button>
          </form>
       </div>

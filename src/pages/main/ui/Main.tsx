@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import illustrationImg from '@/shared/assets/imgs/auth/illustration.png';
 import { useAppDispatch } from '@/app/appStore';
 import { showModal } from '@/widgets/modal';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
    const dispatch = useAppDispatch();
@@ -24,6 +25,11 @@ const Main = () => {
                onClick={handleClick}>
                <span>Выйти</span>
             </button>
+            <Link
+               to='/reset-password'
+               className={classNames('btn btn--light', styles.section__btn)}>
+               <span>Сбросс пароля</span>
+            </Link>
          </section>
       </main>
    );

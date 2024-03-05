@@ -1,14 +1,33 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
-import { useAppDispatch } from '@/app/appStore';
-import { showModal } from '@/widgets/modal';
 
-const VerifyBlock: FC = () => {
-   const dispatch = useAppDispatch();
+type Props = {
+   handelEmailResend: () => void;
+};
+
+const VerifyBlock: FC<Props> = ({ handelEmailResend }) => {
+   // const [countdown, setCountdown] = useState(10);
+   // const [isShowBtn, setIsShowBtn] = useState(false);
+
    const handleClick = () => {
-      dispatch(showModal('EmailNoticeModal'));
+      handelEmailResend();
    };
+
+   // useEffect(() => {
+   //    const timer = setInterval(() => {
+   //       setCountdown((prevCountdown) => prevCountdown - 1);
+   //    }, 1000);
+
+   //    if (countdown === 0) {
+   //       clearInterval(timer);
+   //       setIsShowBtn(true);
+   //    }
+
+   //    return () => {
+   //       clearInterval(timer);
+   //    };
+   // }, [countdown]);
 
    return (
       <div className={styles.block}>
@@ -22,6 +41,22 @@ const VerifyBlock: FC = () => {
             </p>
             <p className={styles.block__smile}>(´｡• ω •｡`)</p>
          </div>
+
+         {/* {isShowBtn ? (
+            <button
+               className={classNames('btn btn--light', styles.block__btn)}
+               onClick={handleClick}>
+               <span>Письмо не пришло</span>
+            </button>
+         ) : (
+            <div className={styles.block__descr}>
+               <p>
+                  Ты сможешь запросить письмо подвтерждения электронной почты повторно через:{' '}
+                  <b>{countdown}</b>
+               </p>
+            </div>
+         )} */}
+
          <button className={classNames('btn btn--light', styles.block__btn)} onClick={handleClick}>
             <span>Письмо не пришло</span>
          </button>

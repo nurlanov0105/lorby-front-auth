@@ -1,28 +1,22 @@
-import { NewPswForm } from '@/features/auth';
-import CheckSendedForm from '@/features/auth/ui/CheckSendedForm';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ForgetPasswordForm } from '@/features/auth';
 
 const ForgetPsw = () => {
-   const navigate = useNavigate();
-   const [showNewPswForm, setShowNewPswForm] = useState(false);
+   const [isShowPasswordForm, setIsShowPasswordForm] = useState(false);
 
-   const handleSendedPsw = (password: string) => {
-      console.log('Отправленный пароль - ', password);
-      setShowNewPswForm(!showNewPswForm);
+   const handleEmail = (email: string) => {
+      console.log(email);
+      setIsShowPasswordForm(true);
    };
-   const handleNewPsw = (newPassword: string) => {
-      console.log('Новый пароль - ', newPassword);
-      navigate('/login');
+   const handlePassword = (password: string) => {
+      console.log(password);
+      setIsShowPasswordForm(true);
    };
-   return (
-      <>
-         {showNewPswForm ? (
-            <NewPswForm handleNewPsw={handleNewPsw} />
-         ) : (
-            <CheckSendedForm handleSendedPsw={handleSendedPsw} />
-         )}
-      </>
+
+   return isShowPasswordForm ? (
+      <ForgetPasswordForm handleData={handleEmail} type='password' />
+   ) : (
+      <ForgetPasswordForm handleData={handlePassword} type='email' />
    );
 };
 

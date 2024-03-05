@@ -2,18 +2,18 @@ export const getUserFromLS = () => {
    const data = localStorage.getItem('currentUser');
 
    if (data) {
-      const { login, email, token } = JSON.parse(data);
+      const { refresh, access, user_info } = JSON.parse(data);
 
       return {
-         login,
-         email,
-         token,
+         refresh,
+         access,
+         user_info,
       };
    }
 
    return {
-      login: null,
-      email: null,
-      token: null,
+      refresh: null,
+      access: null,
+      user_info: null,
    };
 };
