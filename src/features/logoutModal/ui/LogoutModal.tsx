@@ -1,15 +1,21 @@
-import { useAppDispatch } from '@/app/appStore';
+import { useAppDispatch, useAppSelector } from '@/app/appStore';
 import styles from './styles.module.scss';
 import { closeModal } from '@/widgets/modal';
-import { removeUser } from '@/features/auth';
+import { removeUser, useLogoutMutation } from '@/features/auth';
 
 const LogoutModal = () => {
    const dispatch = useAppDispatch();
+   const refreshToken = useAppSelector((state) => state.auth.refresh);
+   const [logout] = useLogoutMutation();
 
-   const handleLogOut = () => {
-      localStorage.removeItem('currentUser');
-      dispatch(removeUser());
-      dispatch(closeModal());
+   const handleLogOut = async () => {
+      const res = await logout({ refreshToken });
+
+      if (res) {
+         localStorage.removeItem('currentUser');
+         dispatch(removeUser());
+         dispatch(closeModal());
+      }
    };
 
    const handleStay = () => {

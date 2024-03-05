@@ -1,88 +1,43 @@
-import { LoginForm, addCurrentUser } from '@/features/auth';
+import { LoginForm, addCurrentUser, useLoginMutation } from '@/features/auth';
 import styles from './styles.module.scss';
 import mobIllustImg from '@/shared/assets/imgs/auth/mobile-illustration.png';
-import { useLoginMutation } from '@/features/auth/api/authApi';
 import { useAppDispatch } from '@/app/appStore';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { errorMessages } from '@/shared/api/errorMessages';
 
 const Login = () => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
-   const [login] = useLoginMutation();
+   const [login, { isLoading }] = useLoginMutation();
 
-   const handleLogin = async (email: string, password: string) => {
+   const handleLogin = async (username: string, password: string) => {
       try {
-         const res: any = await login({ email, password });
-         if (res.error) {
-            switch (res.status) {
-               case 401:
-                  toast.error('Не авторизован');
-                  console.error(res);
-                  break;
-               case 403:
-                  toast.error('аутентификация отключена');
-                  console.error(res);
-                  break;
-               case 404:
-                  toast.error('пользователь не найден');
-                  console.error(res);
-                  break;
-               case 409:
-                  toast.error('Конфликт');
-                  console.error(res);
-                  break;
-               case 500:
-                  toast.error('Внутренняя ошибка сервера');
-                  console.error(res);
-                  break;
-               default:
-                  toast.error('Произошла ошибка');
-                  console.error(res);
-            }
-         } else {
-            const { fullName, email, password } = res.data.data;
-            const token = res.data.token;
+         const res: any = await login({ username, password });
 
-            dispatch(addCurrentUser({ fullName, email, password, token }));
-            const currentUserJson = JSON.stringify({ login: fullName, email, token });
+         if (res) {
+            const { refresh, access, user_info } = res.data.data;
+
+            dispatch(addCurrentUser({ refresh, access, user_info }));
+            const currentUserJson = JSON.stringify({ refresh, access, user_info });
             localStorage.setItem('currentUser', currentUserJson);
 
             toast.success('Успешно залогинился!');
             navigate('/');
          }
       } catch (error: any) {
-         switch (error.status) {
-            case 401:
-               toast.error('Не авторизован');
-               console.error(error);
-               break;
-            case 403:
-               toast.error('аутентификация отключена');
-               console.error(error);
-               break;
-            case 404:
-               toast.error('пользователь не найден');
-               console.error(error);
-               break;
-            case 409:
-               toast.error('Конфликт');
-               console.error(error);
-               break;
-            case 500:
-               toast.error('Внутренняя ошибка сервера');
-               console.error(error);
-               break;
-            default:
-               toast.error('Произошла ошибка');
-               console.error(error);
+         const message = errorMessages[error.status as keyof typeof errorMessages];
+         if (message) {
+            toast.error(message);
+         } else {
+            toast.error('Произошла ошибка при логине');
          }
       }
    };
    return (
       <section className={styles.section}>
          <img src={mobIllustImg} alt='mobile illustartion' className={styles.mobImg} />
-         <LoginForm handleLogin={handleLogin} />
+         <LoginForm handleLogin={handleLogin} isLoading={isLoading} />
       </section>
    );
 };

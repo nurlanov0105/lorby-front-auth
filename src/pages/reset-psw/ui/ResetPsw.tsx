@@ -1,27 +1,22 @@
-import { NewPswForm, ProoveForm } from '@/features/auth';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ProoveForm } from '@/features/auth';
 
 const ResetPsw = () => {
-   const navigate = useNavigate();
+   const [showNewPassword, setShowNewPassword] = useState(false);
 
-   const [showNewPswForm, setShowNewPswForm] = useState(false);
-   const handleOldPsw = (password: string) => {
-      console.log('Старый пароль - ', password);
-      setShowNewPswForm(!showNewPswForm);
+   const handlePassword = (password: string) => {
+      console.log(password);
+      setShowNewPassword(true);
    };
-   const handleNewPsw = (newPassword: string) => {
-      console.log('Новый пароль - ', newPassword);
-      navigate('/login');
+
+   const handleNewPassword = (newPassword: string) => {
+      console.log(newPassword);
    };
-   return (
-      <>
-         {showNewPswForm ? (
-            <NewPswForm handleNewPsw={handleNewPsw} />
-         ) : (
-            <ProoveForm handleOldPsw={handleOldPsw} />
-         )}
-      </>
+
+   return showNewPassword ? (
+      <ProoveForm handleData={handleNewPassword} type='newPassword' />
+   ) : (
+      <ProoveForm handleData={handlePassword} type='password' />
    );
 };
 
