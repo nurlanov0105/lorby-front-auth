@@ -1,12 +1,14 @@
 import { getUserFromLS } from '@/shared/utils/getCurrentUserFromLS';
+import { getUserEmailFromLS } from '@/shared/utils/getUserEmailFromLS';
 import { createSlice } from '@reduxjs/toolkit';
 const { refresh, access, user_info } = getUserFromLS();
+const { email } = getUserEmailFromLS();
 
 const initialState = {
    refresh,
    access,
-   email: null,
    user_info,
+   email,
 };
 
 const authSlice = createSlice({
@@ -18,6 +20,9 @@ const authSlice = createSlice({
          state.access = action.payload.access;
          state.user_info = action.payload.user_info;
       },
+      addEmail: (state, action) => {
+         state.email = action.payload;
+      },
       removeUser: (state) => {
          state.refresh = null;
          state.access = null;
@@ -26,6 +31,6 @@ const authSlice = createSlice({
    },
 });
 
-export const { addCurrentUser, removeUser } = authSlice.actions;
+export const { addCurrentUser, removeUser, addEmail } = authSlice.actions;
 
 export default authSlice.reducer;

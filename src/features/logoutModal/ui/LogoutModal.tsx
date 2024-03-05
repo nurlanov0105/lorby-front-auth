@@ -2,19 +2,32 @@ import { useAppDispatch, useAppSelector } from '@/app/appStore';
 import styles from './styles.module.scss';
 import { closeModal } from '@/widgets/modal';
 import { removeUser, useLogoutMutation } from '@/features/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const LogoutModal = () => {
    const dispatch = useAppDispatch();
-   const refreshToken = useAppSelector((state) => state.auth.refresh);
+   const navigate = useNavigate();
+
+   const refresh = useAppSelector((state) => state.auth.refresh);
    const [logout] = useLogoutMutation();
 
    const handleLogOut = async () => {
-      const res = await logout({ refreshToken });
+      try {
+         const res: any = await logout({ refresh });
+         if (res.error) {
+            toast.error('Произошла ошибка при выходе');
+         } else {
+            toast.success('Ты вышел из аккаунта');
 
-      if (res) {
-         localStorage.removeItem('currentUser');
-         dispatch(removeUser());
-         dispatch(closeModal());
+            localStorage.removeItem('currentUser');
+            dispatch(removeUser());
+            dispatch(closeModal());
+            navigate('/login');
+         }
+      } catch (error: any) {
+         console.error(error);
+         toast.error('Произошла ошибка при выходе');
       }
    };
 

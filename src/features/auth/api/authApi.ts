@@ -1,3 +1,4 @@
+import { RootState } from '@/app/appStore';
 import { Endpoints } from '@/shared/api/endpoints';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // import {
@@ -14,14 +15,13 @@ export const authApi = createApi({
    baseQuery: fetchBaseQuery({
       baseUrl: BASE_URL,
 
-      // prepareHeaders: (headers) => {
-      //    headers.set('Content-Type', 'application/json');
-      //    // const token = document.cookie.split('accessToken=')[1]?.split(';')[0];
-      //    // if (token) {
-      //    //    headers.set('authorization', `Bearer ${token}`);
-      //    // }
-      //    return headers;
-      // },
+      prepareHeaders: (headers, { getState }) => {
+         const token = (getState() as RootState).auth.access;
+         if (token) {
+            headers.set('authorization', `Bearer ${token}`);
+         }
+         return headers;
+      },
    }),
 
    endpoints: (builder) => ({
@@ -46,7 +46,7 @@ export const authApi = createApi({
                url: Endpoints.LOGIN,
                method: 'POST',
                body: {
-                  username,
+                  username: username,
                   password,
                },
             };
@@ -54,24 +54,24 @@ export const authApi = createApi({
       }),
       logout: builder.mutation({
          query: (params) => {
-            const { refresh_token } = params;
+            const { refresh } = params;
             return {
                url: Endpoints.LOGOUT,
                method: 'POST',
                body: {
-                  refresh_token,
+                  refresh_token: refresh,
                },
             };
          },
       }),
       resendEmail: builder.mutation({
          query: (params) => {
-            const { refresh_token } = params;
+            const { email } = params;
             return {
                url: Endpoints.RESEND_EMAIL,
                method: 'POST',
                body: {
-                  refresh_token,
+                  email,
                },
             };
          },
@@ -81,7 +81,7 @@ export const authApi = createApi({
             const { token } = params;
             return {
                url: Endpoints.EMAIL_VERIFY,
-               method: 'POST',
+               method: 'GET',
                params: {
                   token,
                },
