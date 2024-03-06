@@ -16,12 +16,14 @@ const Register = () => {
          if (res.error && res.error.data.email) {
             console.log(res.error);
             toast.error(res.error.data.email[0]);
+            navigate('/login');
          } else if (res.error && res.error.data.username) {
             console.log(res.error);
             toast.error(res.error.data.username[0]);
+            navigate('/login');
          } else if (res.error) {
             console.log(res.error);
-            toast.error('Произошла ошибка при регистрации try');
+            toast.error('Произошла ошибка при регистрации');
          } else {
             dispatch(addEmail(res.data.email));
             const currentUserEmailJson = JSON.stringify({ email: res.data.email });
@@ -31,7 +33,7 @@ const Register = () => {
          }
       } catch (error: any) {
          console.log(error);
-         toast.error('Произошла ошибка при регистрации catch');
+         toast.error('Произошла ошибка при регистрации');
       }
    };
    return <RegisterForm handleRegister={handleRegister} isLoading={isLoading} />;

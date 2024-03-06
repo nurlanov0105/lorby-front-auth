@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useRefreshMutation } from '@/features/auth';
+import { tokenRefresh, useRefreshMutation } from '@/features/auth';
 import { jwtDecode } from 'jwt-decode';
-import { useAppSelector } from '@/app/appStore';
+import { useAppDispatch, useAppSelector } from '@/app/appStore';
+import { getUserFromLS } from '../utils/getCurrentUserFromLS';
 
 const useAuthTokens = () => {
+   const dispatch = useAppDispatch();
    const [refreshTokenMutation] = useRefreshMutation();
 
    const [isAccessTokenExpired, setIsAccessTokenExpired] = useState(false);
@@ -32,10 +34,19 @@ const useAuthTokens = () => {
 
       // Refresh access token if it's expired
       if (isAccessTokenExpired && !isRefreshTokenExpired) {
-         refreshTokenMutation({})
+         refreshTokenMutation({ refreshToken })
             .unwrap()
             .then((res: any) => {
                if (res) {
+                  dispatch(tokenRefresh({ accessToken: res.access, refreshToken: res.refresh }));
+
+                  const data = getUserFromLS();
+                  if (data) {
+                     data.access = res.access;
+                     data.refresh = res.refresh;
+                     localStorage.setItem('currentUser', JSON.stringify(data));
+                  }
+
                   setIsAccessTokenExpired(false);
                   console.log(res);
                }

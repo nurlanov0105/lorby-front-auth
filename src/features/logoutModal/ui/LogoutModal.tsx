@@ -10,12 +10,13 @@ const LogoutModal = () => {
    const navigate = useNavigate();
 
    const refresh = useAppSelector((state) => state.auth.refresh);
-   const [logout] = useLogoutMutation();
+   const [logout, { isLoading }] = useLogoutMutation();
 
    const handleLogOut = async () => {
       try {
          const res: any = await logout({ refresh });
          if (res.error) {
+            console.log(res.error);
             toast.error('Произошла ошибка при выходе');
          } else {
             toast.success('Ты вышел из аккаунта');
@@ -26,7 +27,7 @@ const LogoutModal = () => {
             navigate('/login');
          }
       } catch (error: any) {
-         console.error(error);
+         console.log(error);
          toast.error('Произошла ошибка при выходе');
       }
    };
@@ -41,7 +42,7 @@ const LogoutModal = () => {
          <h5 className={styles.block__subtitle}>Точно выйти?</h5>
          <div className={styles.block__btns}>
             <button className='btn' onClick={handleLogOut}>
-               <span>Да, точно</span>
+               {isLoading ? <span>Выход...</span> : <span>Да, точно</span>}
             </button>
             <button className='btn btn--light' onClick={handleStay}>
                <span>Нет, остаться</span>

@@ -8,18 +8,22 @@ import { toast } from 'react-toastify';
 
 const Confirm = () => {
    const [searchParams] = useSearchParams();
-   const [emailVerify] = useEmailVerifyMutation();
+   const [emailVerify, { isLoading, isSuccess, error }] = useEmailVerifyMutation();
 
    const handleConfirm = async (token: string) => {
       try {
-         const response = await emailVerify({ token });
-         console.log(response);
+         const response: any = await emailVerify({ token });
+         if (response.error) {
+            console.log(response.error);
+         } else {
+            console.log(response);
+         }
       } catch (error: any) {
          const message = errorMessages[error.status as keyof typeof errorMessages];
          if (message) {
             toast.error(message);
          } else {
-            toast.error('Произошла ошибка при логине');
+            toast.error('Произошла ошибка верификации');
          }
       }
    };
@@ -31,7 +35,7 @@ const Confirm = () => {
          handleConfirm(token);
       }
    }, []);
-   return <ConfirmBlock />;
+   return <ConfirmBlock isLoading={isLoading} error={error} isSuccess={isSuccess} />;
 };
 
 export default Confirm;

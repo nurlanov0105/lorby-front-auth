@@ -105,22 +105,24 @@ const ProoveForm: FC<Props> = ({ type = 'password', handleData }) => {
                         )}
                      </ul>
                   </div>
-                  <div className={styles.form__box}>
-                     <input
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        className={pswConfirmClassNames}
-                        placeholder='Повтори пароль'
-                        name='passwordConfirm'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.passwordConfirm}
-                     />
-                     <img
-                        src={showConfirmPassword ? eyeOpenedImg : eyeClosedImg}
-                        alt='eye opened'
-                        className={styles.form__eye}
-                        onClick={handleConfirmPasswordShow}
-                     />
+                  <div className={styles.form__outbox}>
+                     <div className={styles.form__box}>
+                        <input
+                           type={showConfirmPassword ? 'text' : 'password'}
+                           className={pswConfirmClassNames}
+                           placeholder='Повтори пароль'
+                           name='passwordConfirm'
+                           onChange={formik.handleChange}
+                           onBlur={formik.handleBlur}
+                           value={formik.values.passwordConfirm}
+                        />
+                        <img
+                           src={showConfirmPassword ? eyeOpenedImg : eyeClosedImg}
+                           alt='eye opened'
+                           className={styles.form__eye}
+                           onClick={handleConfirmPasswordShow}
+                        />
+                     </div>
                      <ErrorMessage formik={formik} name='passwordConfirm' />
                   </div>
                </div>
@@ -170,22 +172,24 @@ const ProoveForm: FC<Props> = ({ type = 'password', handleData }) => {
                         )}
                      </ul>
                   </div>
-                  <div className={styles.form__box}>
-                     <input
-                        type={showNewConfirmPassword ? 'text' : 'password'}
-                        className={pswConfirmClassNames}
-                        placeholder='Повтори пароль'
-                        name='newPasswordConfirm'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.newPasswordConfirm}
-                     />
-                     <img
-                        src={showNewConfirmPassword ? eyeOpenedImg : eyeClosedImg}
-                        alt='eye opened'
-                        className={styles.form__eye}
-                        onClick={handleNewConfirmPasswordShow}
-                     />
+                  <div className={styles.form__outbox}>
+                     <div className={styles.form__box}>
+                        <input
+                           type={showNewConfirmPassword ? 'text' : 'password'}
+                           className={pswConfirmClassNames}
+                           placeholder='Повтори пароль'
+                           name='newPasswordConfirm'
+                           onChange={formik.handleChange}
+                           onBlur={formik.handleBlur}
+                           value={formik.values.newPasswordConfirm}
+                        />
+                        <img
+                           src={showNewConfirmPassword ? eyeOpenedImg : eyeClosedImg}
+                           alt='eye opened'
+                           className={styles.form__eye}
+                           onClick={handleNewConfirmPasswordShow}
+                        />
+                     </div>
                      <ErrorMessage formik={formik} name='newPasswordConfirm' />
                   </div>
                </div>

@@ -23,14 +23,22 @@ const authSlice = createSlice({
       addEmail: (state, action) => {
          state.email = action.payload;
       },
+      removeEmail: (state) => {
+         state.email = null;
+      },
       removeUser: (state) => {
          state.refresh = null;
          state.access = null;
          state.user_info = null;
       },
+      tokenRefresh: (state, action) => {
+         state.access = action.payload.accessToken;
+         state.refresh = action.payload.refreshToken;
+      },
    },
 });
 
-export const { addCurrentUser, removeUser, addEmail } = authSlice.actions;
+export const { addCurrentUser, removeUser, addEmail, removeEmail, tokenRefresh } =
+   authSlice.actions;
 
 export default authSlice.reducer;
