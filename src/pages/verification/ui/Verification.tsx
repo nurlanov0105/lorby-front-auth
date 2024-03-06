@@ -7,18 +7,15 @@ import { toast } from 'react-toastify';
 const Verification = () => {
    const dispatch = useAppDispatch();
    const email = useAppSelector((state) => state.auth.email);
-   const [resendEmail] = useResendEmailMutation();
+   const [resendEmail, { isSuccess, isLoading, error }] = useResendEmailMutation();
 
    const handelEmailResend = async () => {
       try {
          const res: any = await resendEmail({ email });
          if (res.error) {
-            console.log('Email - ', email);
-            console.error(res.error);
+            console.log(res.error);
             toast.error('Произошла ошибка отправке письма try');
          } else {
-            console.log('Email - ', email);
-            console.log(res);
             dispatch(showModal('EmailNoticeModal'));
          }
       } catch (error) {
@@ -29,7 +26,7 @@ const Verification = () => {
 
    return (
       <>
-         <VerifyBlock handelEmailResend={handelEmailResend} />
+         <VerifyBlock handelEmailResend={handelEmailResend} isLoading={isLoading} />
       </>
    );
 };

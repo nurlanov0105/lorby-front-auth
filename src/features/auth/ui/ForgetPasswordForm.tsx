@@ -58,38 +58,41 @@ const ForgetPasswordForm: FC<Props> = ({ type = 'email', handleData }) => {
          <form onSubmit={formik.handleSubmit} className={styles.form}>
             <div className={styles.form__col}>
                {type === 'email' ? (
-                  <div className={styles.form__box}>
-                     <input
-                        type='email'
-                        className={emailClassNames}
-                        placeholder='Введи адрес почты'
-                        name='email'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        // @ts-ignore
-                        value={formik.values.email}
-                     />
-
+                  <div className={styles.form__outbox}>
+                     <div className={styles.form__box}>
+                        <input
+                           type='email'
+                           className={emailClassNames}
+                           placeholder='Введи адрес почты'
+                           name='email'
+                           onChange={formik.handleChange}
+                           onBlur={formik.handleBlur}
+                           // @ts-ignore
+                           value={formik.values.email}
+                        />
+                     </div>
                      <ErrorMessage formik={formik} name='email' />
                   </div>
                ) : (
-                  <div className={styles.form__box}>
-                     <input
-                        type={showPassword ? 'text' : 'password'}
-                        className={pswClassNames}
-                        placeholder='Введи пароль'
-                        name='password'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        // @ts-ignore
-                        value={formik.values.password}
-                     />
-                     <img
-                        src={showPassword ? eyeOpenedImg : eyeClosedImg}
-                        alt='eye opened'
-                        className={styles.form__eye}
-                        onClick={handlePasswordShow}
-                     />
+                  <div className={styles.form__outbox}>
+                     <div className={styles.form__box}>
+                        <input
+                           type={showPassword ? 'text' : 'password'}
+                           className={pswClassNames}
+                           placeholder='Введи пароль'
+                           name='password'
+                           onChange={formik.handleChange}
+                           onBlur={formik.handleBlur}
+                           // @ts-ignore
+                           value={formik.values.password}
+                        />
+                        <img
+                           src={showPassword ? eyeOpenedImg : eyeClosedImg}
+                           alt='eye opened'
+                           className={styles.form__eye}
+                           onClick={handlePasswordShow}
+                        />
+                     </div>
                      <ErrorMessage formik={formik} name='password' />
                   </div>
                )}

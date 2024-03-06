@@ -39,6 +39,12 @@
       row-gap: 14px;
    }
 
+   &__outbox {
+      display: block;
+      width: 100%;
+      position: relative;
+   }
+
    &__box {
       display: block;
       width: 100%;

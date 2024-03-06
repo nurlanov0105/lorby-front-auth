@@ -56,23 +56,25 @@ const LoginForm: FC<Props> = ({ handleLogin, isLoading }) => {
 
                   <ErrorMessage formik={formik} name='login' />
                </div>
+               <div className={styles.form__outbox}>
+                  <div className={styles.form__box}>
+                     <input
+                        type={showPassword ? 'text' : 'password'}
+                        className={pswClassNames}
+                        placeholder='Пароль (тоже введи)'
+                        name='password'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                     />
+                     <img
+                        src={showPassword ? eyeOpenedImg : eyeClosedImg}
+                        alt='eye opened'
+                        className={styles.form__eye}
+                        onClick={handlePasswordShow}
+                     />
+                  </div>
 
-               <div className={styles.form__box}>
-                  <input
-                     type={showPassword ? 'text' : 'password'}
-                     className={pswClassNames}
-                     placeholder='Пароль (тоже введи)'
-                     name='password'
-                     onChange={formik.handleChange}
-                     onBlur={formik.handleBlur}
-                     value={formik.values.password}
-                  />
-                  <img
-                     src={showPassword ? eyeOpenedImg : eyeClosedImg}
-                     alt='eye opened'
-                     className={styles.form__eye}
-                     onClick={handlePasswordShow}
-                  />
                   <ErrorMessage formik={formik} name='password' />
                </div>
             </div>

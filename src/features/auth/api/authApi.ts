@@ -83,17 +83,19 @@ export const authApi = createApi({
                url: Endpoints.EMAIL_VERIFY,
                method: 'GET',
                params: {
-                  token,
+                  token: token,
                },
             };
          },
       }),
       refresh: builder.mutation({
-         query: () => {
+         query: ({ refreshToken }) => {
             return {
                url: Endpoints.REFRESH,
                method: 'POST',
-               credentials: 'include',
+               body: {
+                  refresh: refreshToken,
+               },
             };
          },
       }),

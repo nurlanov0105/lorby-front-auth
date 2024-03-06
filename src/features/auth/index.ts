@@ -1,6 +1,12 @@
 import LoginForm from './ui/LoginForm';
 import RegisterForm from './ui/RegisterForm';
-import authSlice, { addCurrentUser, removeUser, addEmail } from './model/authSlice';
+import authSlice, {
+   addCurrentUser,
+   removeUser,
+   addEmail,
+   removeEmail,
+   tokenRefresh,
+} from './model/authSlice';
 import {
    authApi,
    useRegisterMutation,
@@ -30,6 +36,8 @@ export {
    addCurrentUser,
    removeUser,
    addEmail,
+   removeEmail,
+   tokenRefresh,
    loginValidationSchema,
    NewPswForm,
    ForgetPasswordForm,

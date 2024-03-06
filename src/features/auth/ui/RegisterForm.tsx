@@ -63,16 +63,18 @@ const RegisterForm: FC<Props> = ({ handleRegister, isLoading }) => {
 
                   <ErrorMessage formik={formik} name='email' />
                </div>
-               <div className={styles.form__box}>
-                  <input
-                     type='text'
-                     className={loginClassNames}
-                     placeholder='Придумай логин'
-                     name='login'
-                     onChange={formik.handleChange}
-                     onBlur={formik.handleBlur}
-                     value={formik.values.login}
-                  />
+               <div className={styles.form__outbox}>
+                  <div className={styles.form__box}>
+                     <input
+                        type='text'
+                        className={loginClassNames}
+                        placeholder='Придумай логин'
+                        name='login'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.login}
+                     />
+                  </div>
                   <ErrorMessage formik={formik} name='login' />
                </div>
 
@@ -120,22 +122,24 @@ const RegisterForm: FC<Props> = ({ handleRegister, isLoading }) => {
                   </ul>
                </div>
 
-               <div className={styles.form__box}>
-                  <input
-                     type={showConfirmPassword ? 'text' : 'password'}
-                     className={pswConfirmClassNames}
-                     placeholder='Повтори пароль'
-                     name='passwordConfirm'
-                     onChange={formik.handleChange}
-                     onBlur={formik.handleBlur}
-                     value={formik.values.passwordConfirm}
-                  />
-                  <img
-                     src={showConfirmPassword ? eyeOpenedImg : eyeClosedImg}
-                     alt='eye opened'
-                     className={styles.form__eye}
-                     onClick={handleConfirmPasswordShow}
-                  />
+               <div className={styles.form__outbox}>
+                  <div className={styles.form__box}>
+                     <input
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        className={pswConfirmClassNames}
+                        placeholder='Повтори пароль'
+                        name='passwordConfirm'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.passwordConfirm}
+                     />
+                     <img
+                        src={showConfirmPassword ? eyeOpenedImg : eyeClosedImg}
+                        alt='eye opened'
+                        className={styles.form__eye}
+                        onClick={handleConfirmPasswordShow}
+                     />
+                  </div>
                   <ErrorMessage formik={formik} name='passwordConfirm' />
                </div>
             </div>

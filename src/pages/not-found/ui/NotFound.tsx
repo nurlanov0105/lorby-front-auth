@@ -1,7 +1,11 @@
-// import styles from './styles.module.scss';
+import styles from './styles.module.scss';
 
 const NotFound = () => {
-   return <div>NotFound</div>;
+   return (
+      <section className={styles.section}>
+         <h2 className='h2'>Not Found</h2>
+      </section>
+   );
 };
 
 export default NotFound;

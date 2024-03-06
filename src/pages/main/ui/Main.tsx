@@ -8,8 +8,11 @@ import { Link } from 'react-router-dom';
 const Main = () => {
    const dispatch = useAppDispatch();
 
-   const handleClick = () => {
+   const handleLogOut = () => {
       dispatch(showModal('LogoutModal'));
+   };
+   const handleDeleteAccount = () => {
+      dispatch(showModal('DeleteModal'));
    };
 
    return (
@@ -22,7 +25,7 @@ const Main = () => {
             <img src={illustrationImg} alt='illustration img' className={styles.section__img} />
             <button
                className={classNames('btn btn--light', styles.section__btn)}
-               onClick={handleClick}>
+               onClick={handleLogOut}>
                <span>Выйти</span>
             </button>
             <Link
@@ -30,6 +33,11 @@ const Main = () => {
                className={classNames('btn btn--light', styles.section__btn)}>
                <span>Сбросс пароля</span>
             </Link>
+            <button
+               className={classNames('btn btn--light', styles.section__btn)}
+               onClick={handleDeleteAccount}>
+               <span>Удалить аккаунт</span>
+            </button>
          </section>
       </main>
    );
