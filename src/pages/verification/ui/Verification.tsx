@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const Verification = () => {
    const dispatch = useAppDispatch();
    const email = useAppSelector((state) => state.auth.email);
-   const [resendEmail, { isSuccess, isLoading, error }] = useResendEmailMutation();
+   const [resendEmail, { isLoading }] = useResendEmailMutation();
 
    const handelEmailResend = async () => {
       try {

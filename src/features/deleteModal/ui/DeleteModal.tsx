@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/app/appStore';
+import { useAppDispatch } from '@/app/appStore';
 import styles from './styles.module.scss';
 import { closeModal } from '@/widgets/modal';
 import { removeUser } from '@/features/auth';
