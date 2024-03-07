@@ -1,5 +1,14 @@
-import LoginForm from './ui/LoginForm';
-import RegisterForm from './ui/RegisterForm';
+import { authApi } from './api/authApi';
+
+import {
+   useRegisterMutation,
+   useLoginMutation,
+   useRefreshMutation,
+   useEmailVerifyMutation,
+   useLogoutMutation,
+   useResendEmailMutation,
+} from './model/authApiSlice';
+
 import authSlice, {
    addCurrentUser,
    removeUser,
@@ -7,15 +16,10 @@ import authSlice, {
    removeEmail,
    tokenRefresh,
 } from './model/authSlice';
-import {
-   authApi,
-   useRegisterMutation,
-   useLoginMutation,
-   useRefreshMutation,
-   useEmailVerifyMutation,
-   useLogoutMutation,
-   useResendEmailMutation,
-} from './api/authApi';
+
+import LoginForm from './ui/LoginForm';
+import RegisterForm from './ui/RegisterForm';
+
 import { loginValidationSchema } from './model/validation';
 import ProoveForm from './ui/ProoveForm';
 import NewPswForm from './ui/NewPswForm';
