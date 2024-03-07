@@ -1,21 +1,26 @@
-export interface RegisterParams {
-   login: string;
-   email: string;
+export interface Credentials {
+   login?: string;
+   username?: string;
    password: string;
 }
 
-export interface LoginParams {
-   email: string;
-   password: string;
+export interface TokenPair {
+   refresh: string;
+   access: string;
 }
 
-export interface RefreshParams {
-   // token: string;
+export interface EmailParam {
+   email: string;
 }
-export interface confirmRegistrationParams {
+
+export interface TokenParam {
    token: string;
 }
 
-export interface AuthResponse {
-   accessToken: string;
-}
+export type RegisterParams = Credentials & EmailParam;
+export type LoginResponse = TokenPair & { user_info: Credentials };
+export type LogoutParams = Pick<TokenPair, 'refresh'>;
+export type ResendEmailParams = EmailParam;
+export type emailVerifyParams = TokenParam;
+export type RefreshResponse = TokenPair;
+export type RefreshParams = { refreshToken: string };

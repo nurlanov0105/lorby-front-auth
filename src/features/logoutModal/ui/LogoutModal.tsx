@@ -39,10 +39,10 @@ const LogoutModal = () => {
          <h4 className={styles.block__title}>Выйти?</h4>
          <h5 className={styles.block__subtitle}>Точно выйти?</h5>
          <div className={styles.block__btns}>
-            <button className='btn' onClick={handleLogOut}>
+            <button className='btn' onClick={handleLogOut} disabled={isLoading}>
                {isLoading ? <span>Выход...</span> : <span>Да, точно</span>}
             </button>
-            <button className='btn btn--light' onClick={handleStay}>
+            <button className='btn btn--light' onClick={handleStay} disabled={isLoading}>
                <span>Нет, остаться</span>
             </button>
          </div>

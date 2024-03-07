@@ -1,9 +1,19 @@
 import { Endpoints } from '@/shared/api/endpoints';
 import { authApi } from '..';
+import {
+   Credentials,
+   LoginResponse,
+   LogoutParams,
+   RefreshParams,
+   RefreshResponse,
+   RegisterParams,
+   ResendEmailParams,
+   emailVerifyParams,
+} from './interfaces';
 
 export const authApiSlice = authApi.injectEndpoints({
    endpoints: (builder) => ({
-      register: builder.mutation({
+      register: builder.mutation<string, RegisterParams>({
          query: (params) => {
             const { login, email, password } = params;
             return {
@@ -17,7 +27,7 @@ export const authApiSlice = authApi.injectEndpoints({
             };
          },
       }),
-      login: builder.mutation({
+      login: builder.mutation<LoginResponse, Credentials>({
          query: (params) => {
             const { username, password } = params;
             return {
@@ -30,7 +40,7 @@ export const authApiSlice = authApi.injectEndpoints({
             };
          },
       }),
-      logout: builder.mutation({
+      logout: builder.mutation<string, LogoutParams>({
          query: (params) => {
             const { refresh } = params;
             return {
@@ -42,7 +52,7 @@ export const authApiSlice = authApi.injectEndpoints({
             };
          },
       }),
-      resendEmail: builder.mutation({
+      resendEmail: builder.mutation<string, ResendEmailParams>({
          query: (params) => {
             const { email } = params;
             return {
@@ -54,7 +64,7 @@ export const authApiSlice = authApi.injectEndpoints({
             };
          },
       }),
-      emailVerify: builder.mutation({
+      emailVerify: builder.mutation<string, emailVerifyParams>({
          query: (params) => {
             const { token } = params;
             return {
@@ -66,7 +76,7 @@ export const authApiSlice = authApi.injectEndpoints({
             };
          },
       }),
-      refresh: builder.mutation({
+      refresh: builder.mutation<RefreshResponse, RefreshParams>({
          query: ({ refreshToken }) => {
             return {
                url: Endpoints.REFRESH,
