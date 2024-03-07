@@ -32,8 +32,12 @@ const authSlice = createSlice({
          state.user_info = null;
       },
       tokenRefresh: (state, action) => {
-         state.access = action.payload.accessToken;
-         state.refresh = action.payload.refreshToken;
+         console.log(action.payload);
+         const { access, refresh } = action.payload;
+         console.log('state.access - ', access);
+         console.log('state.refresh - ', refresh);
+         state.access = access;
+         state.refresh = refresh;
       },
    },
 });

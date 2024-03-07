@@ -17,7 +17,6 @@ const LogoutModal = () => {
          const res: any = await logout({ refresh });
          if (res.error) {
             console.log(res.error);
-            toast.error('Произошла ошибка при выходе');
          } else {
             toast.success('Ты вышел из аккаунта');
 
@@ -28,7 +27,6 @@ const LogoutModal = () => {
          }
       } catch (error: any) {
          console.log(error);
-         toast.error('Произошла ошибка при выходе');
       }
    };
 
