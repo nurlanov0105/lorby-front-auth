@@ -6,3 +6,8 @@ export type ErrorCodeType = {
    409: string;
    500: string;
 };
+
+export type TokensType = {
+   access: string;
+   refresh: string;
+};

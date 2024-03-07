@@ -32,7 +32,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
    if (result.error && result.error.status === 401) {
       // send refresh token to get new access token
-      // const refreshResult: any = await baseQuery(Endpoints.REFRESH, api, extraOptions);
       const refreshResult: any = await baseQuery(
          {
             url: Endpoints.REFRESH,

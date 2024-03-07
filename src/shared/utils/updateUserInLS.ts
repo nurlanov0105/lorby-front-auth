@@ -1,6 +1,7 @@
+import { TokensType } from '../types/types';
 import { getUserFromLS } from './getCurrentUserFromLS';
 
-export const updateUserInLS = (tokens: any) => {
+export const updateUserInLS = (tokens: TokensType) => {
    const { access, refresh } = tokens;
    const userData = getUserFromLS();
    const updatedUserData = {

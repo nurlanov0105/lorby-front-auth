@@ -15,7 +15,7 @@ const Modal = () => {
    const onCloseModal = () => {
       dispatch(closeModal());
    };
-   const handleClick = (e: any) => e.stopPropagation();
+   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation();
 
    const componentsLookUp = { EmailNoticeModal, LogoutModal, DeleteModal };
    let RenderComponent;
