@@ -7,7 +7,6 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { Endpoints } from '@/shared/api/endpoints';
 import { closeModal } from '@/widgets/modal';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_TOURS_BASE_API_URL;
 
@@ -73,5 +72,5 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const authApi = createApi({
    reducerPath: 'authApi',
    baseQuery: baseQueryWithReauth,
-   endpoints: (builder) => ({}),
+   endpoints: () => ({}),
 });

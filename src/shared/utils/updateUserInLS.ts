@@ -6,6 +6,7 @@ export const updateUserInLS = (tokens: any) => {
    const updatedUserData = {
       ...userData,
       access: access,
+      refresh: refresh,
    };
 
    localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
