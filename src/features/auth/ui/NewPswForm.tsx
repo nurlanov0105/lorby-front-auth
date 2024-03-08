@@ -60,7 +60,7 @@ const NewPswForm: FC<Props> = ({ handleNewPsw }) => {
                         value={formik.values.password}
                      />
                      <img
-                        src={showPassword ? eyeOpenedImg : eyeClosedImg}
+                        src={showPassword ? eyeClosedImg : eyeOpenedImg}
                         alt='eye opened'
                         className={styles.form__eye}
                         onClick={handlePasswordShow}
@@ -103,7 +103,7 @@ const NewPswForm: FC<Props> = ({ handleNewPsw }) => {
                      value={formik.values.passwordConfirm}
                   />
                   <img
-                     src={showConfirmPassword ? eyeOpenedImg : eyeClosedImg}
+                     src={showConfirmPassword ? eyeClosedImg : eyeOpenedImg}
                      alt='eye opened'
                      className={styles.form__eye}
                      onClick={handleConfirmPasswordShow}
