@@ -87,7 +87,7 @@ const ForgetPasswordForm: FC<Props> = ({ type = 'email', handleData }) => {
                            value={formik.values.password}
                         />
                         <img
-                           src={showPassword ? eyeOpenedImg : eyeClosedImg}
+                           src={showPassword ? eyeClosedImg : eyeOpenedImg}
                            alt='eye opened'
                            className={styles.form__eye}
                            onClick={handlePasswordShow}
