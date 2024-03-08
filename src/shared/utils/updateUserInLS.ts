@@ -10,5 +10,8 @@ export const updateUserInLS = (tokens: TokensType) => {
       refresh: refresh,
    };
 
-   localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
+   if (updatedUserData) {
+      console.log('updatedUserData - ', updatedUserData);
+      localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
+   }
 };
