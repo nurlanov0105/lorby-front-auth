@@ -16,6 +16,7 @@ const baseQuery = fetchBaseQuery({
 
    prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.access;
+      console.log('prepareHeaders access token - ', token);
       if (token) {
          headers.set('authorization', `Bearer ${token}`);
       }
@@ -48,15 +49,17 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
          console.log('success - ', refreshResult);
          api.dispatch(tokenRefresh(refreshResult.data));
          updateUserInLS(refreshResult.data);
-         console.log('refreshResult.data.access - ', refreshResult.data.access);
 
          // Здесь access токен при первом запросе не актуален, поэтому выходит ошибка при первом logout, срабатывает только во второй раз, когда получает акутальный access токен. Я не смог установить сюда актульное значение accesss токена. SOS
 
          result = await baseQuery(args, api, extraOptions);
 
-         console.log(result);
-         api.dispatch(closeModal());
+         if (result.error && result.error.status === 400) {
+            toast.error('Попробуй еще раз!');
+         }
+
          console.log('retry the original token - ', result);
+         api.dispatch(closeModal());
       } else {
          console.log('token not valid - ', refreshResult);
          api.dispatch(closeModal());
