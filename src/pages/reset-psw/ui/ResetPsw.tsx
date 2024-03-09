@@ -1,23 +1,35 @@
-import { useState } from 'react';
-import { ProoveForm } from '@/features/auth';
+import { ProoveForm, useChangePasswordMutation } from '@/features/auth';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ResetPsw = () => {
-   const [showNewPassword, setShowNewPassword] = useState(false);
+   const [changePassword, { isLoading }] = useChangePasswordMutation();
+   const navigate = useNavigate();
 
-   const handlePassword = (password: string) => {
-      console.log(password);
-      setShowNewPassword(true);
+   const handlePassword = async (oldPassword: string, password: string) => {
+      console.log(oldPassword, password);
+
+      try {
+         const res: any = await changePassword({
+            old_password: oldPassword,
+            new_password: password,
+         });
+
+         if (res.error && res.error.status === 400) {
+            console.log(res.error);
+            toast.error(res.error.data.Error);
+         } else {
+            console.log('psew changed - ', res);
+            navigate('/');
+            toast.success('Пароль успешно изменен!');
+         }
+      } catch (error) {
+         console.log(error);
+         toast.error('Произошла ошибка');
+      }
    };
 
-   const handleNewPassword = (newPassword: string) => {
-      console.log(newPassword);
-   };
-
-   return showNewPassword ? (
-      <ProoveForm handleData={handleNewPassword} type='newPassword' />
-   ) : (
-      <ProoveForm handleData={handlePassword} type='password' />
-   );
+   return <ProoveForm handleData={handlePassword} isLoading={isLoading} />;
 };
 
 export default ResetPsw;

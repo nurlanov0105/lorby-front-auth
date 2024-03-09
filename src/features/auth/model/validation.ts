@@ -63,3 +63,15 @@ export const newPswValidationSchema = yup.object({
       .oneOf([yup.ref('newPassword'), undefined], 'Пароли должны совпадать')
       .required('Пароли должны совпадать'),
 });
+
+export const allPasswordSchema = yup.object({
+   oldPassword: passwordSchema,
+   password: passwordSchema.notOneOf(
+      [yup.ref('oldPassword')],
+      'Новый пароль не должен совпадать со старым'
+   ),
+   passwordConfirm: yup
+      .string()
+      .oneOf([yup.ref('password'), undefined], 'Пароли должны совпадать')
+      .required('Пароли должны совпадать'),
+});

@@ -24,3 +24,15 @@ export type ResendEmailParams = EmailParam;
 export type emailVerifyParams = TokenParam;
 export type RefreshResponse = TokenPair;
 export type RefreshParams = { refreshToken: string };
+
+export type PasswordResetType = {
+   password: string;
+   token: string;
+};
+export type ChangePasswordType = {
+   old_password: string;
+   new_password: string;
+};
+export type deleteType = {
+   refresh_token: string;
+};

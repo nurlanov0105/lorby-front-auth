@@ -7,6 +7,10 @@ import {
    useEmailVerifyMutation,
    useLogoutMutation,
    useResendEmailMutation,
+   useEmailSendMutation,
+   usePasswordResetMutation,
+   useChangePasswordMutation,
+   useDeleteMutation,
 } from './model/authApiSlice';
 
 import authSlice, {
@@ -37,6 +41,10 @@ export {
    useEmailVerifyMutation,
    useLogoutMutation,
    useResendEmailMutation,
+   useEmailSendMutation,
+   usePasswordResetMutation,
+   useChangePasswordMutation,
+   useDeleteMutation,
    addCurrentUser,
    removeUser,
    addEmail,
