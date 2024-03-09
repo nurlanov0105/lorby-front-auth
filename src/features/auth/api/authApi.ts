@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 
    prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.access;
-      console.log('prepareHeaders access token - ', token);
+
       if (token) {
          headers.set('authorization', `Bearer ${token}`);
       }
@@ -46,7 +46,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       );
 
       if (refreshResult.data) {
-         console.log('success - ', refreshResult);
          api.dispatch(tokenRefresh(refreshResult.data));
          updateUserInLS(refreshResult.data);
 
@@ -56,16 +55,16 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
          if (result.error && result.error.status === 400) {
             toast.error('Попробуй еще раз!');
+            console.log(result.error);
          }
 
-         console.log('retry the original token - ', result);
          api.dispatch(closeModal());
       } else {
+         toast.error(refreshResult.error.data);
          console.log('token not valid - ', refreshResult);
          api.dispatch(closeModal());
          api.dispatch(removeUser());
          localStorage.removeItem('currentUser');
-         toast.error(refreshResult.error.data);
       }
    }
    return result;

@@ -1,13 +1,16 @@
 import { Endpoints } from '@/shared/api/endpoints';
 import { authApi } from '..';
 import {
+   ChangePasswordType,
    Credentials,
    LoginResponse,
    LogoutParams,
+   PasswordResetType,
    RefreshParams,
    RefreshResponse,
    RegisterParams,
    ResendEmailParams,
+   deleteType,
    emailVerifyParams,
 } from './interfaces';
 
@@ -87,6 +90,52 @@ export const authApiSlice = authApi.injectEndpoints({
             };
          },
       }),
+      emailSend: builder.mutation<string, ResendEmailParams>({
+         query: ({ email }) => {
+            return {
+               url: Endpoints.EMAIL_SEND,
+               method: 'POST',
+               body: {
+                  email: email,
+               },
+            };
+         },
+      }),
+      passwordReset: builder.mutation<PasswordResetType, PasswordResetType>({
+         query: ({ password, token }) => {
+            return {
+               url: Endpoints.PASSWORD_RESET,
+               method: 'POST',
+               body: {
+                  password,
+                  token,
+               },
+            };
+         },
+      }),
+      changePassword: builder.mutation<string, ChangePasswordType>({
+         query: ({ old_password, new_password }) => {
+            return {
+               url: Endpoints.CHANGE_PASSWORD,
+               method: 'POST',
+               body: {
+                  old_password,
+                  new_password,
+               },
+            };
+         },
+      }),
+      delete: builder.mutation<string, deleteType>({
+         query: ({ refresh_token }) => {
+            return {
+               url: Endpoints.DELETE,
+               method: 'DELETE',
+               body: {
+                  refresh_token,
+               },
+            };
+         },
+      }),
    }),
 });
 
@@ -97,4 +146,8 @@ export const {
    useLogoutMutation,
    useEmailVerifyMutation,
    useResendEmailMutation,
+   useEmailSendMutation,
+   usePasswordResetMutation,
+   useChangePasswordMutation,
+   useDeleteMutation,
 } = authApiSlice;

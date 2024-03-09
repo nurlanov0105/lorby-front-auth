@@ -7,24 +7,19 @@ import styles from './styles.module.scss';
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 import { useAppDispatch } from '@/app/appStore';
-import { showModal } from '@/widgets/modal';
 import { getInputClassNames } from '../model/getInputClassNames';
 import ErrorMessage from './ErrorMessage';
 
 type Props = {
    type: string;
    handleData: (data: string) => void;
+   isLoading?: boolean;
 };
 
-const ForgetPasswordForm: FC<Props> = ({ type = 'email', handleData }) => {
-   const dispatch = useAppDispatch();
+const ForgetPasswordForm: FC<Props> = ({ type = 'email', handleData, isLoading = false }) => {
    const [showPassword, setShowPassword] = useState(false);
 
    const handlePasswordShow = () => setShowPassword(!showPassword);
-
-   const handleClick = () => {
-      dispatch(showModal('EmailNoticeModal'));
-   };
 
    const formik = useFormik({
       initialValues: {
@@ -49,9 +44,9 @@ const ForgetPasswordForm: FC<Props> = ({ type = 'email', handleData }) => {
          <div className={styles.heading}>
             <h3 className='h3'>Сбросс пароля</h3>
             {type === 'email' ? (
-               <h4>Напиши почту на которую отправят новый пароль</h4>
+               <h4>Напиши почту на которую отправят письмо</h4>
             ) : (
-               <h4>На твою почту отправили новый пароль</h4>
+               <h4>Создай новый пароль</h4>
             )}
          </div>
 
@@ -101,21 +96,10 @@ const ForgetPasswordForm: FC<Props> = ({ type = 'email', handleData }) => {
             <button
                type='submit'
                className={classNames('btn', styles.form__btn)}
-               disabled={!!Object.keys(formik.errors).length}>
-               <span>Далее</span>
+               disabled={!!Object.keys(formik.errors).length || isLoading}>
+               {isLoading ? <span>Загрузка...</span> : <span>Далее</span>}
             </button>
          </form>
-         {type !== 'email' ? (
-            <div className={styles.btns}>
-               <button
-                  className={classNames('btn btn--light', styles.btnLight)}
-                  onClick={handleClick}>
-                  <span>Не получил{'(а)'} пароль</span>
-               </button>
-            </div>
-         ) : (
-            ''
-         )}
       </div>
    );
 };

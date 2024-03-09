@@ -10,6 +10,7 @@ import { Modal } from '@/widgets/modal';
 import { Confirm } from '@/pages/confirm';
 import { ForgetPsw } from '@/pages/forget-psw';
 import { ResetPsw } from '@/pages/reset-psw';
+import { NewPassword } from '@/pages/new-password';
 
 const Routers = () => {
    return (
@@ -24,6 +25,7 @@ const Routers = () => {
                <Route path='register' element={<Register />} />
                <Route path='verification' element={<Verification />} />
                <Route path='forget-password' element={<ForgetPsw />} />
+               <Route path='new-password' element={<NewPassword />} />
                <Route path='reset-password' element={<ResetPsw />} />
                <Route path='confirm' element={<Confirm />} />
             </Route>
