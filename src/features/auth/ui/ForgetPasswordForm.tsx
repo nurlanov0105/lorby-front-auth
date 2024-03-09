@@ -6,7 +6,6 @@ import styles from './styles.module.scss';
 
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
-import { useAppDispatch } from '@/app/appStore';
 import { getInputClassNames } from '../model/getInputClassNames';
 import ErrorMessage from './ErrorMessage';
 
