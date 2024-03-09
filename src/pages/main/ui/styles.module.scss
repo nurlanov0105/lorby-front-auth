@@ -28,6 +28,7 @@
    }
 
    @media (max-width: 1439px) {
+      height: auto;
       &__img {
          max-width: 36rem;
       }
@@ -37,5 +38,12 @@
       &__subtitle {
          margin-bottom: 48px;
       }
+   }
+}
+
+@media (max-width: 1439px) {
+   .main {
+      height: auto;
+      padding-top: 5rem;
    }
 }
