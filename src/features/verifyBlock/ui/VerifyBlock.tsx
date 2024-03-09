@@ -26,7 +26,10 @@ const VerifyBlock: FC<Props> = ({ handelEmailResend, isLoading }) => {
             <p className={styles.block__smile}>(´｡• ω •｡`)</p>
          </div>
 
-         <button className={classNames('btn btn--light', styles.block__btn)} onClick={handleClick}>
+         <button
+            className={classNames('btn btn--light', styles.block__btn)}
+            onClick={handleClick}
+            disabled={isLoading}>
             {isLoading ? <span>Загрузка...</span> : <span>Письмо не пришло</span>}
          </button>
       </div>
