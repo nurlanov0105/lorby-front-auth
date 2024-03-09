@@ -1,6 +1,5 @@
 import { useEmailVerifyMutation } from '@/features/auth';
 import { ConfirmBlock } from '@/features/confirmBlock';
-import { errorMessages } from '@/shared/api/errorMessages';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
