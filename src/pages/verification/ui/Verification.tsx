@@ -14,7 +14,7 @@ const Verification = () => {
          const res: any = await resendEmail({ email });
          if (res.error) {
             console.log(res.error);
-            toast.error('Произошла ошибка отправке письма try');
+            toast.error('Произошла ошибка отправке письма');
          } else {
             dispatch(showModal('EmailNoticeModal'));
          }

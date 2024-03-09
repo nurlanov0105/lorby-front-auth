@@ -19,12 +19,8 @@ const Confirm = () => {
             console.log(response);
          }
       } catch (error: any) {
-         const message = errorMessages[error.status as keyof typeof errorMessages];
-         if (message) {
-            toast.error(message);
-         } else {
-            toast.error('Произошла ошибка верификации');
-         }
+         console.log(error);
+         toast.error('Произошла ошибка верификации');
       }
    };
 
