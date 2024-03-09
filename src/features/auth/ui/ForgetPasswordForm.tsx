@@ -7,7 +7,6 @@ import styles from './styles.module.scss';
 import eyeOpenedImg from '@/shared/assets/imgs/auth/eye-opened.svg';
 import eyeClosedImg from '@/shared/assets/imgs/auth/eye-closed.svg';
 import { useAppDispatch } from '@/app/appStore';
-import { showModal } from '@/widgets/modal';
 import { getInputClassNames } from '../model/getInputClassNames';
 import ErrorMessage from './ErrorMessage';
 
@@ -18,7 +17,6 @@ type Props = {
 };
 
 const ForgetPasswordForm: FC<Props> = ({ type = 'email', handleData, isLoading = false }) => {
-   const dispatch = useAppDispatch();
    const [showPassword, setShowPassword] = useState(false);
 
    const handlePasswordShow = () => setShowPassword(!showPassword);
