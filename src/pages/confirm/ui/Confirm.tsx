@@ -1,6 +1,5 @@
 import { useEmailVerifyMutation } from '@/features/auth';
 import { ConfirmBlock } from '@/features/confirmBlock';
-import { errorMessages } from '@/shared/api/errorMessages';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -19,12 +18,8 @@ const Confirm = () => {
             console.log(response);
          }
       } catch (error: any) {
-         const message = errorMessages[error.status as keyof typeof errorMessages];
-         if (message) {
-            toast.error(message);
-         } else {
-            toast.error('Произошла ошибка верификации');
-         }
+         console.log(error);
+         toast.error('Произошла ошибка верификации');
       }
    };
 

@@ -25,6 +25,7 @@ const Register = () => {
             console.log(res.error);
             toast.error('Произошла ошибка при регистрации');
          } else {
+            console.log(res);
             dispatch(addEmail(res.data.email));
             const currentUserEmailJson = JSON.stringify({ email: res.data.email });
             localStorage.setItem('currentUserEmail', currentUserEmailJson);
